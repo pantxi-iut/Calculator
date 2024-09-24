@@ -1,6 +1,8 @@
 package com.pantxi;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 /*
 L'instruction : import org.junit.jupiter.api.*     inclut (pour notre code) :
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +24,29 @@ class CalculatorTest {
 
         //THEN
         assertThat(somme).isEqualTo(3);
+    }
+
+    @DisplayName("Plusieurs exécutions de sommes simples de 2 int " )
+    @ParameterizedTest(name = "{0} + {1} = {2}")
+    @CsvSource({
+            "0,    1,   1",
+            "1,    2,   3",
+            "-2,   2,   0",
+            "0,    0,   0",
+            "-1,   -2,  -3"
+    })
+
+    void add_parametre_devrait_calculer_la_somme_de_deux_int(int first, int second, int expectedResult)  {
+        // GIVEN
+
+        // WHEN
+        int somme = Calculator.add(first, second);
+
+        // THEN  -- SI on ne s'occupe pas de l'exception levée
+
+        //assertEquals(expectedResult, calculatorEnTest.add(first, second),
+        //		() -> first + " + " + second + " should equal " + expectedResult);	// JUnit
+        assertThat(somme).isEqualTo(expectedResult);	                            // assertJ
     }
 
     @Test
