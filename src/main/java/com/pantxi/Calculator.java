@@ -6,4 +6,8 @@ public class Calculator {
         double somme = (double) opG + (double) opD;
         return (int) somme;
     }
+
+    public int divide(int opG, int opD) {
+        return opG / opD;
+    }
 }
