@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Set;
 
 class CalculatorTest {
 
@@ -71,5 +72,40 @@ class CalculatorTest {
 
         //THEN
         assertThat(quotient).isEqualTo(3);
+    }
+
+    @Test
+    void digitsSet_devrait_retourner_les_chiffres_d_un_entier_positif() {
+        //GIVEN
+        int entierPositif = 97689;
+
+        //WHEN
+        Set<Integer> ensembleChiffres = Calculator.ensembleChiffres(entierPositif);
+
+        //THEN
+        assertThat(ensembleChiffres).containsExactlyInAnyOrder(6, 7, 8, 9);
+    }
+
+    @Test
+    void digitsSet_devrait_retourner_les_chiffres_d_un_entier_negatif() {
+        //GIVEN
+        int entierNegatif = -1;
+
+        //WHEN
+        Set<Integer> ensembleChiffres = Calculator.ensembleChiffres(entierNegatif);
+
+        //THEN
+        assertThat(ensembleChiffres).containsExactlyInAnyOrder(1);
+    }
+    @Test
+    void digitsSet_devrait_retourner_le_chiffre_0_d_un_entier_nul() {
+        //GIVEN
+        int entierNul = 0000;
+
+        //WHEN
+        Set<Integer> ensembleChiffres = Calculator.ensembleChiffres(entierNul);
+
+        //THEN
+        assertThat(ensembleChiffres).containsExactlyInAnyOrder(0);
     }
 }
