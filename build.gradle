@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
+	id 'jacoco'
 }
 
 repositories {
@@ -12,11 +13,22 @@ dependencies {
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	// url de référence : https://mvnrepository.com/artifact/org.assertj/assertj-core
 	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.3'
+
 }
 
 test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
+	}
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = true
+		//html.outputLocation=layout.buildDirectory.dir('reports/jacoco/test')
+		html.outputLocation=layout.projectDirectory.dir('reports/jacoco/test')
 	}
 }
