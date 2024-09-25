@@ -28,7 +28,6 @@ jacocoTestReport {
 	dependsOn test
 	reports {
 		xml.required = true
-		//html.outputLocation=layout.buildDirectory.dir('reports/jacoco/test')
-		html.outputLocation=layout.projectDirectory.dir('reports/jacoco/test')
+		html.outputLocation=layout.buildDirectory.dir('reports/jacoco/test')
 	}
 }
